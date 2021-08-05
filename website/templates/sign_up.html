@@ -1,0 +1,109 @@
+{% extends "base.html" %}{% block title %}Sign up{% endblock %}
+
+{% block content %}
+<form method="POST">
+  <h3 align="center">Sign Up</h3>
+
+  <div class="form-group">
+    <label for="manabaUserName">manaba user name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="manabaUserName"
+      name="manabaUserName"
+      placeholder="Enter manaba user name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="manabaPassword1">manaba password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="manabaPassword1"
+      name="manabaPassword1"
+      placeholder="Enter manaba password"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="manabaPassword2">manaba password(Confirm)</label>
+    <input
+      type="password"
+      class="form-control"
+      id="manabaPassword2"
+      name="manabaPassword2"
+      placeholder="Enter manaba password"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="lineApiToken1">line api token</label>
+    <input
+      type="password"
+      class="form-control"
+      id="lineApiToken1"
+      name="lineApiToken1"
+      placeholder="Enter line api token"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="lineApiToken2">line api token(Confirm)</label>
+    <input
+      type="password"
+      class="form-control"
+      id="lineApiToken2"
+      name="lineApiToken2"
+      placeholder="Enter line api token"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="Enter first name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="password1">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password1"
+      name="password1"
+      placeholder="Enter password"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="password2">Password (Confirm)</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Confirm password"
+    />
+  </div>
+
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
