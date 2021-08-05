@@ -7,10 +7,24 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route("/user/my_page")
+@auth.route("/my_page")
 @login_required
 def show():
   return render_template("show.html", user=current_user)
+
+@auth.route("/update", methods=["GET", "POST"])
+@login_required
+def update():
+  if   request.method == "POST":
+    current_user.first_name       = request.form.get("firstName")
+    current_user.manaba_user_name = request.form.get("manabaUserName")
+    current_user.email            = request.form.get("email")
+    current_user.is_active        = True if request.form.get("isActive")=="true" else False
+    db.session.commit()
+    flash('Account created!', category='success')
+    return redirect(url_for('auth.show'))
+  elif request.method == "GET":
+    return render_template("update.html", user=current_user)
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
@@ -23,7 +37,7 @@ def login():
       if check_password_hash(user.password, password):
         flash('Logged in successfully!', category='success')
         login_user(user, remember=True)
-        return redirect(url_for('views.home'))
+        return redirect(url_for('auth.show'))
       else:
         flash('Incorrect password, try again.', category='error')
     else:

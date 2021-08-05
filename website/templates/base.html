@@ -31,11 +31,13 @@
     <div class="collapse navbar-collapse" id="navbar">
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-        <a class="nav-item nav-link" id="home" href="/">Home</a>
-        <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+        <a class="nav-item nav-link" id="show" href="/my_page">詳細画面</a>
+        <a class="nav-item nav-link" id="update" href="/update">編集画面</a>
+        <a class="nav-item nav-link" id="logout" href="/logout">ログアウト</a>
         {% else %}
-        <a class="nav-item nav-link" id="login" href="/login">Login</a>
-        <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+        <a class="nav-item nav-link" id="home" href="/">Home</a>
+        <a class="nav-item nav-link" id="login" href="/login">ログイン</a>
+        <a class="nav-item nav-link" id="signUp" href="/sign-up">サインアップ</a>
         {% endif %}
       </div>
     </div>

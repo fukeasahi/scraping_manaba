@@ -1,0 +1,57 @@
+{% extends "base.html" %}{% block title %}Update{% endblock %}
+
+{% block content %}
+
+<form action="/update" method="POST">
+  <h3 align="center">編集画面</h3>
+
+  <div class="form-group">
+    <label for="firstName">名前</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="Enter first name"
+      value={{user.first_name}}
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="manabaUserName">manaba＋R のUser ID</label>
+    <input
+      type="text"
+      class="form-control"
+      id="manabaUserName"
+      name="manabaUserName"
+      placeholder="Enter manaba user name"
+      value={{user.manaba_user_name}}
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+      value={{user.email}}
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="isActive">LINEへの通知</label>
+    <select name="isActive" class="form-control">
+      <option value="true" class="form-control">ON</option>
+      <option value="false" class="form-control">OFF</option>
+    </select>
+  </div>
+
+  <br />
+  <button type="submit" class="btn btn-success form-control">更新</button>
+</form>
+<br>
+
+{% endblock %}

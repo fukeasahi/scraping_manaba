@@ -2,9 +2,10 @@
 
 {% block content %}
 
+<h3 align="center">詳細画面</h3>
 <h3>名前:{{user.first_name}}</h3>
-<h3>manaba+RのUser Name:{{user.manaba_user_name}}</h3>
-<h3>email:{{user.email}}</h3>
-<h3>通知:{{"ON" if user.is_active else "OFF"}}</h3>
-<a href="user/edit">編集画面</a>
+<h3>manaba＋R のUser ID:{{user.manaba_user_name}}</h3>
+<h3>Email:{{user.email}}</h3>
+<h3>LINEへの通知:{{"ON" if user.is_active else "OFF"}}</h3>
+
 {% endblock %}
