@@ -36,16 +36,16 @@ def logout():
 @auth.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
   if request.method == "POST":
-    email           = request.form.get("email")
+    email            = request.form.get("email")
     first_name       = request.form.get("firstName")
-    password1       = request.form.get("password1")
-    password2       = request.form.get("password2")
-    manaba_user_name  = request.form.get("manabaUserName")
+    password1        = request.form.get("password1")
+    password2        = request.form.get("password2")
+    manaba_user_name = request.form.get("manabaUserName")
     manaba_password1 = request.form.get("manabaPassword1")
     manaba_password2 = request.form.get("manabaPassword2")
-    line_api_token1   = request.form.get("lineApiToken1")
-    line_api_token2   = request.form.get("lineApiToken2")
-    is_active         = True
+    line_api_token1  = request.form.get("lineApiToken1")
+    line_api_token2  = request.form.get("lineApiToken2")
+    is_active        = True
 
     user = User.query.filter_by(email=email).first()
     if user:
