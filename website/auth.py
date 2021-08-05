@@ -18,14 +18,14 @@ def login():
       if check_password_hash(user.password, password):
         flash('Logged in successfully!', category='success')
         login_user(user, remember=True)
-        print('gooooooooo views.home')
         return redirect(url_for('views.home'))
       else:
         flash('Incorrect password, try again.', category='error')
     else:
       flash('Email does not exist.', category='error')
 
-  return render_template("login.html", boolean = False)
+  elif request.method == "GET":
+    return render_template("login.html", user=current_user)
 
 @auth.route("/logout")
 @login_required
@@ -45,6 +45,7 @@ def sign_up():
     manaba_password2 = request.form.get("manabaPassword2")
     line_api_token1   = request.form.get("lineApiToken1")
     line_api_token2   = request.form.get("lineApiToken2")
+    is_active         = True
 
     user = User.query.filter_by(email=email).first()
     if user:
@@ -68,11 +69,11 @@ def sign_up():
     elif len(line_api_token1) < 7:
       flash("ineApiToken must be greater than 7 characyers.", category="error")
     else:
-      new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'),manaba_user_name=manaba_user_name,manaba_password=generate_password_hash(manaba_password1, method='sha256'),line_api_token = generate_password_hash(line_api_token1, method='sha256'))
+      new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'),manaba_user_name=manaba_user_name,manaba_password=generate_password_hash(manaba_password1, method='sha256'),line_api_token = generate_password_hash(line_api_token1, method='sha256'),is_active = is_active)
       db.session.add(new_user)
       db.session.commit()
       login_user(new_user, remember=True)
       flash('Account created!', category='success')
       return redirect(url_for('views.home'))
 
-  return render_template("sign_up.html")
+  return render_template("sign_up.html", user=current_user)
