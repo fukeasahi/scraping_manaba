@@ -1,2 +1,7 @@
 # scraping_manaba
-## https://youtu.be/dam0GPOAvVIを参考にログイン機能を作成した。
+
+## ログイン機能
+- https://youtu.be/dam0GPOAvVI
+
+## 編集画面
+- https://youtu.be/jP7p2okKdJA
