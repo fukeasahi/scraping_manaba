@@ -17,5 +17,5 @@ class User(db.Model, UserMixin):
   manaba_user_name = db.Column(db.String(150))
   manaba_password = db.Column(db.String(150))
   is_active = db.Column(db.Boolean)
-  date = db.Column(db.DateTime(timezone=True), default=func.now())
+  # date = db.Column(db.DateTime(timezone=True), default=func.now())
   notes = db.relationship('Note')
