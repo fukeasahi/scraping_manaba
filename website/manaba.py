@@ -11,8 +11,7 @@ from bs4 import BeautifulSoup
 import re
 import requests
 import datetime
-from .__init__ import USN
-
+from .__init__ import PRIVATE_KEY, RECEIVER_KEY 
 
 manaba = Blueprint('manaba', __name__)
 
@@ -24,7 +23,8 @@ def test():
     #     print(user.manaba_user_name)
     #     print(user.manaba_password)
     #     print(480**8)
-    print(USN)
+    print(PRIVATE_KEY)
+    print(RECEIVER_KEY)
     return "testを実行中"
 
 
