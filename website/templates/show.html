@@ -3,9 +3,28 @@
 {% block content %}
 
 <h3 align="center">詳細画面</h3>
-<h3>名前:{{user.first_name}}</h3>
-<h3>manaba＋R のUser ID:{{user.manaba_user_name}}</h3>
-<h3>Email:{{user.email}}</h3>
-<h3>LINEへの通知:{{"ON" if user.is_active else "OFF"}}</h3>
+<table class="table">
+
+  <tr>
+    <td>名前</td>
+    <td>{{user.first_name}}</td>
+  </tr>
+
+  <tr>
+    <td>manaba＋R のUser ID</td>
+    <td>{{user.manaba_user_name}}</td>
+  </tr>
+
+  <tr>
+    <td>Email</td>
+    <td>{{user.email}}</td>
+  </tr>
+
+  <tr>
+    <td>LINEへの通知</td>
+    <td>{{"ON" if user.is_active else "OFF"}}</td>
+  </tr>
+
+</table>
 
 {% endblock %}

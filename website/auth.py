@@ -16,15 +16,29 @@ def show():
 @login_required
 def update():
   if   request.method == "POST":
-    current_user.first_name       = request.form.get("firstName")
-    current_user.manaba_user_name = request.form.get("manabaUserName")
-    current_user.email            = request.form.get("email")
-    current_user.is_active        = True if request.form.get("isActive")=="true" else False
-    db.session.commit()
-    flash('Account created!', category='success')
-    return redirect(url_for('auth.show'))
-  elif request.method == "GET":
-    return render_template("update.html", user=current_user)
+    first_name       = request.form.get("firstName")
+    manaba_user_name = request.form.get("manabaUserName")
+    email            = request.form.get("email")
+
+    user = User.query.filter_by(email=email)
+    if email != current_user.email and user.count() >= 1:
+      flash('Email already exists.', category='error')
+    elif len(email) < 4:
+      flash("Email must be greater than 4 characyers.", category="error")
+    elif len(first_name) < 2:
+      flash("First name must be greater than 2 characyers.", category="error")
+    elif len(manaba_user_name) < 7:
+      flash("manaba User Name must be greater than 7 characyers.", category="error")
+    else:
+      current_user.first_name       = first_name
+      current_user.manaba_user_name = manaba_user_name
+      current_user.email            = email
+      current_user.is_active        = True if request.form.get("isActive")=="true" else False
+      db.session.commit()
+      flash('Account updated!', category='success')
+      return redirect(url_for('auth.show'))
+
+  return render_template("update.html", user=current_user)
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
@@ -43,8 +57,7 @@ def login():
     else:
       flash('Email does not exist.', category='error')
 
-  elif request.method == "GET":
-    return render_template("login.html", user=current_user)
+  return render_template("login.html", user=current_user)
 
 @auth.route("/logout")
 @login_required
