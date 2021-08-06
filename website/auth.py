@@ -4,15 +4,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
 auth = Blueprint('auth', __name__)
-
 
 @auth.route("/my_page")
 @login_required
 def show():
     return render_template("show.html", user=current_user)
-
 
 @auth.route("/update", methods=["GET", "POST"])
 @login_required
@@ -110,8 +110,21 @@ def sign_up():
         elif len(line_api_token1) < 7:
             flash("ineApiToken must be greater than 7 characyers.", category="error")
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'), manaba_user_name=manaba_user_name, manaba_password=generate_password_hash(
-                manaba_password1, method='sha256'), line_api_token=generate_password_hash(line_api_token1, method='sha256'), is_active=is_active)
+            with open('receiver.pem', 'rb') as f:
+                public_pem = f.read()
+                public_key = RSA.import_key(public_pem)
+
+            cipher_rsa = PKCS1_OAEP.new(public_key)
+            manaba_password = cipher_rsa.encrypt(manaba_password1.encode())
+            line_api_token = cipher_rsa.encrypt(line_api_token1.encode())
+
+            new_user = User(email=email, 
+                            first_name=first_name, 
+                            password=generate_password_hash(password1, method='sha256'), 
+                            manaba_user_name=manaba_user_name, 
+                            manaba_password=manaba_password, 
+                            line_api_token=line_api_token, 
+                            is_active=is_active)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)

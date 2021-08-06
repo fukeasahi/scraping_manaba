@@ -20,24 +20,28 @@ manaba = Blueprint('manaba', __name__)
 
 @manaba.route("/test")
 def test():
-    # 暗号化
+    # # 暗号化
+    # with open('receiver.pem', 'rb') as f:
+    #     public_pem = f.read()
+    #     public_key = RSA.import_key(public_pem)
+
+    # message = "Hello Python World!"# 暗号化する文章
+    # cipher_rsa = PKCS1_OAEP.new(public_key)
+    # ciphertext = cipher_rsa.encrypt(message.encode())
+    # print(ciphertext)# データベースに格納する
+
     with open('private.pem', 'rb') as f:
         private_pem = f.read()
         private_key = RSA.import_key(private_pem)
-
-    message = "Hello Python World!"# 暗号化する文章
-    cipher_rsa = PKCS1_OAEP.new(public_key)
-    ciphertext = cipher_rsa.encrypt(message.encode())
-    print(ciphertext)# データベースに格納する
+    decipher_rsa = PKCS1_OAEP.new(private_key)
 
     # 解読
-    with open('receiver.pem', 'rb') as f:
-        public_pem = f.read()
-        public_key = RSA.import_key(public_pem)
-
-    decipher_rsa = PKCS1_OAEP.new(private_key)
-    msg = decipher_rsa.decrypt(ciphertext).decode("utf-8")
-    print(msg)
+    # users = User.query.filter_by(is_active=True)
+    users = User.query.filter_by(email="i@gmail.com")
+    for user in users:
+        print("aaaaaaaaaaaaaaa",user.email)
+        msg = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
+        print(msg)
     return "testを実行中"
 
 
