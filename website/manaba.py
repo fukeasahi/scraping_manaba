@@ -11,20 +11,33 @@ from bs4 import BeautifulSoup
 import re
 import requests
 import datetime
-from .__init__ import PRIVATE_KEY, RECEIVER_KEY 
+
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
 manaba = Blueprint('manaba', __name__)
 
 
 @manaba.route("/test")
 def test():
-    # users = User.query.filter_by(is_active=True)
-    # for user in users:
-    #     print(user.manaba_user_name)
-    #     print(user.manaba_password)
-    #     print(480**8)
-    print(PRIVATE_KEY)
-    print(RECEIVER_KEY)
+    # 暗号化
+    with open('private.pem', 'rb') as f:
+        private_pem = f.read()
+        private_key = RSA.import_key(private_pem)
+
+    message = "Hello Python World!"# 暗号化する文章
+    cipher_rsa = PKCS1_OAEP.new(public_key)
+    ciphertext = cipher_rsa.encrypt(message.encode())
+    print(ciphertext)# データベースに格納する
+
+    # 解読
+    with open('receiver.pem', 'rb') as f:
+        public_pem = f.read()
+        public_key = RSA.import_key(public_pem)
+
+    decipher_rsa = PKCS1_OAEP.new(private_key)
+    msg = decipher_rsa.decrypt(ciphertext).decode("utf-8")
+    print(msg)
     return "testを実行中"
 
 

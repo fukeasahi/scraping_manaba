@@ -4,14 +4,14 @@ from os import path
 from flask_login import LoginManager
 
 # ここから環境変数の設定
-import os
-from os.path import join, dirname
-from dotenv import load_dotenv
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-PRIVATE_KEY = os.environ.get("PRIVATE_KEY")
-RECEIVER_KEY = os.environ.get("RECEIVER_KEY")
+# import os
+# from os.path import join, dirname
+# from dotenv import load_dotenv
+# load_dotenv(verbose=True)
+# dotenv_path = join(dirname(__file__), '.env')
+# load_dotenv(dotenv_path)
+# PRIVATE_KEY = os.environ.get("PRIVATE_KEY")
+# RECEIVER_KEY = os.environ.get("RECEIVER_KEY")
 # ここまで
 
 db = SQLAlchemy()
