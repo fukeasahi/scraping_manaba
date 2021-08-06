@@ -3,6 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+load_dotenv(verbose=True)
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+USN = os.environ.get("USER_NAME")
+PWD = os.environ.get("PASSWORD")
+
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
@@ -14,9 +26,11 @@ def create_app():
 
   from .views import views
   from .auth import auth
+  from .manaba import manaba
 
   app.register_blueprint(views, url_prefix="/")
   app.register_blueprint(auth,  url_prefix="/")
+  app.register_blueprint(manaba,url_prefix="/")
 
   from .models import User, Note
 
