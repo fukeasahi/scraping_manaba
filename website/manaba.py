@@ -17,26 +17,7 @@ from Crypto.Cipher import PKCS1_OAEP
 
 manaba = Blueprint('manaba', __name__)
 
-
-@manaba.route("/test")
-def test():
-    # with open('private.pem', 'rb') as f:
-    #     private_pem = f.read()
-    #     private_key = RSA.import_key(private_pem)
-    # decipher_rsa = PKCS1_OAEP.new(private_key)
-
-    # users = User.query.filter_by(is_active=True)
-    # for user in users:
-    #     USER = decipher_rsa.decrypt(user.manaba_user_name).decode("utf-8")
-    #     PASS = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
-    #     API_TOKEN = decipher_rsa.decrypt(user.line_api_token).decode("utf-8")
-    #     print(USER)
-    #     print(PASS)
-    #     print(API_TOKEN)
-    return "testを実行中"
-
-
-@manaba.route("/scraping")
+@manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     try:
         with open('private.pem', 'rb') as f:
@@ -119,4 +100,5 @@ def scraping():
         pass
     finally:
         print('all finish')
-    return "スクレイピング実行中"
+    return render_template("home.html")
+
