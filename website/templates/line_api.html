@@ -1,11 +1,85 @@
+<style>
+  .home_box1{
+    margin-bottom: 150px;
+  }
+  .home_box2{
+    margin-bottom: 100px;
+  }
+  .how_do_you_use_MLI{
+    width: 40%;
+  }
+</style>
 {% extends "base.html" %}{% block title %}MLI{% endblock %}
 
 {% block content %}
 <div class="home_box1">
   <h1 align="center">LINE NotifyのAPI Tokenの発行方法</h1>
-  <p align="center">
-    MLIは、manab+Rの新着情報を毎日午前0時にあなたのLINEに通知するWebアプリケーションです。
+</div>
+
+<div class="home_box1">
+  <h3 align="center">1.LINE Notifyのページにアクセス</h3>
+  <div align="center"><img src="/static/images/line_notify-login.png" style="width:100%;"></div>
+  <p>
+    LINEアプリのアカウントを持っている人はLINE Notifyを使用することができます。
+    まず、LINE Notifyのページにアクセスしてください
+    <a href="https://notify-bot.line.me/ja/">LINE Notifyのページはこちら</a>。
+    アクセス後、右上の「ログイン」のボタンをクリックしてください。
   </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">2.LINE Notifyにログイン</h3>
+  <div align="center"><img src="/static/images/20018c30121c17357001ba5043b296d0.png" style="width:100%;"></div>
+  <p>
+    上の写真のようなログイン画面が表示されたら、LINEに登録しているメールアドレスとパスワードでログインします。
+    登録メールアドレスは、LINEアプリの『設定>アカウント』から確認することが出来ます。
+  </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">3.マイページにアクセス</h3>
+  <div align="center"><img src="/static/images/line_notify-mypage.png" style="width:100%;"></div>
+  <p>
+    ログイン後、画面右上のボタンをクリックし、ポップアップされた画面のうち、「マイページ」をクリックしてください。
+  </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">4.「トークンを発行する」をクリック</h3>
+  <div align="center"><img src="/static/images/line_notify-token-button.png" style="width:100%;"></div>
+  <p>
+    写真のような「トークンを発行する」というボタンがあるので、クリックしてください。
+  </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">6.トークンの発行</h3>
+  <div align="center"><img src="/static/images/line_notify-token-info.png" style="width:100%;"></div>
+  <p>
+    「トークン名」を記入し、通知を送信するトークルームを選択して下さい。(他人が閲覧できるトークルームを選択しないように気をつけて下さい)
+  </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">7.発行したトークンのコピー</h3>
+  <div align="center"><img src="/static/images/bdaaebe166428562d94c663ccf35a3c5.png" style="width:100%;"></div>
+  <p>
+    発行したトークンをコピーして下さい。
+  </p>
+</div>
+
+<div class="home_box1">
+  <h3 align="center">8.MLIの会員登録でトークンの貼り付け、登録</h3>
+  <div align="center"><img src="/static/images/line_api_form.png" style="width:100%;"></div>
+  <p>
+    コピーしたトークンをMLIの会員登録画面で、「LINE NotifyのAPI Token」、「LINE NotifyのAPI Token(確認)」に貼り付けて、他の情報と一緒に登録して下さい。
+  </p>
+</div>
+
+<div class="home_box2">
+  <h3 align="center">参考文献</h3>
+  <p>おいぬ(2018)「【使ってみた】LINE Notifyを使ってトークルームにメッセージ送信」(https://www.smilevision.co.jp/blog/tsukatte01/)参照日:2021年8月7日</p>
+  <p>FUJIYA(2020)「Pythonで定期的にLINE Notifyへ通知送る-Python」(https://fujiya228.com/python-line_notify/)参照日:2021年8月7日</p>
 </div>
 
 {% endblock %}
