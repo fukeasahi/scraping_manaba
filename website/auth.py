@@ -19,7 +19,6 @@ def show():
 def update():
     if request.method == "POST":
         first_name = request.form.get("firstName")
-        manaba_user_name = request.form.get("manabaUserName")
         email = request.form.get("email")
 
         user = User.query.filter_by(email=email)
@@ -29,15 +28,10 @@ def update():
             flash("Email must be greater than 4 characyers.", category="error")
         elif len(first_name) < 2:
             flash("First name must be greater than 2 characyers.", category="error")
-        elif len(manaba_user_name) < 7:
-            flash("manaba User Name must be greater than 7 characyers.",
-                  category="error")
         else:
             current_user.first_name = first_name
-            current_user.manaba_user_name = manaba_user_name
             current_user.email = email
-            current_user.is_active = True if request.form.get(
-                "isActive") == "true" else False
+            current_user.is_active = True if request.form.get("isActive") == "true" else False
             db.session.commit()
             flash('Account updated!', category='success')
             return redirect(url_for('auth.show'))
@@ -79,7 +73,8 @@ def sign_up():
         first_name = request.form.get("firstName")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
-        manaba_user_name = request.form.get("manabaUserName")
+        manaba_user_name1 = request.form.get("manabaUserName1")
+        manaba_user_name2 = request.form.get("manabaUserName2")
         manaba_password1 = request.form.get("manabaPassword1")
         manaba_password2 = request.form.get("manabaPassword2")
         line_api_token1 = request.form.get("lineApiToken1")
@@ -97,7 +92,9 @@ def sign_up():
             flash("Passwords don\'t match.", category="error")
         elif len(password1) < 7:
             flash("Passwords must be greater than 7 characyers.", category="error")
-        elif len(manaba_user_name) < 7:
+        elif manaba_user_name1 != manaba_user_name2:
+            flash("manabaPassword don\'t match.", category="error")
+        elif len(manaba_user_name1) < 7:
             flash("manaba User Name must be greater than 7 characyers.",
                   category="error")
         elif manaba_password1 != manaba_password2:
@@ -110,13 +107,16 @@ def sign_up():
         elif len(line_api_token1) < 7:
             flash("ineApiToken must be greater than 7 characyers.", category="error")
         else:
+            # ここから暗号化
             with open('receiver.pem', 'rb') as f:
                 public_pem = f.read()
                 public_key = RSA.import_key(public_pem)
 
             cipher_rsa = PKCS1_OAEP.new(public_key)
+            manaba_user_name = cipher_rsa.encrypt(manaba_user_name1.encode())
             manaba_password = cipher_rsa.encrypt(manaba_password1.encode())
             line_api_token = cipher_rsa.encrypt(line_api_token1.encode())
+            # ここまで暗号化
 
             new_user = User(email=email, 
                             first_name=first_name, 

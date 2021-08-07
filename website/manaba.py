@@ -20,37 +20,36 @@ manaba = Blueprint('manaba', __name__)
 
 @manaba.route("/test")
 def test():
-    # # 暗号化
-    # with open('receiver.pem', 'rb') as f:
-    #     public_pem = f.read()
-    #     public_key = RSA.import_key(public_pem)
+    # with open('private.pem', 'rb') as f:
+    #     private_pem = f.read()
+    #     private_key = RSA.import_key(private_pem)
+    # decipher_rsa = PKCS1_OAEP.new(private_key)
 
-    # message = "Hello Python World!"# 暗号化する文章
-    # cipher_rsa = PKCS1_OAEP.new(public_key)
-    # ciphertext = cipher_rsa.encrypt(message.encode())
-    # print(ciphertext)# データベースに格納する
-
-    with open('private.pem', 'rb') as f:
-        private_pem = f.read()
-        private_key = RSA.import_key(private_pem)
-    decipher_rsa = PKCS1_OAEP.new(private_key)
-
-    # 解読
     # users = User.query.filter_by(is_active=True)
-    users = User.query.filter_by(email="i@gmail.com")
-    for user in users:
-        print("aaaaaaaaaaaaaaa",user.email)
-        msg = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
-        print(msg)
+    # for user in users:
+    #     USER = decipher_rsa.decrypt(user.manaba_user_name).decode("utf-8")
+    #     PASS = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
+    #     API_TOKEN = decipher_rsa.decrypt(user.line_api_token).decode("utf-8")
+    #     print(USER)
+    #     print(PASS)
+    #     print(API_TOKEN)
     return "testを実行中"
 
 
 @manaba.route("/scraping")
 def scraping():
+    with open('private.pem', 'rb') as f:
+        private_pem = f.read()
+        private_key = RSA.import_key(private_pem)
+    decipher_rsa = PKCS1_OAEP.new(private_key)
+
     users = User.query.filter_by(is_active=True)
     for user in users:
-        USER = user.manaba_user_name  # データベースからとってくる
-        PASS = user.manaba_password  # データベースからとってくる
+        # ここから暗号化解読
+        USER = decipher_rsa.decrypt(user.manaba_user_name).decode("utf-8")
+        PASS = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
+        api_token = decipher_rsa.decrypt(user.line_api_token).decode("utf-8")
+        # ここまで暗号化解読
 
         browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.implicitly_wait(3)
