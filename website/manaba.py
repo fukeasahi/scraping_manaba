@@ -16,14 +16,15 @@ import datetime
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 
+import os
+
 manaba = Blueprint('manaba', __name__)
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     try:
-        with open('private.pem', 'rb') as f:
-            private_pem = f.read()
-            private_key = RSA.import_key(private_pem)
+        private_pem = os.environ['PRIVATE_KEY']
+        private_key = RSA.import_key(private_pem)
         decipher_rsa = PKCS1_OAEP.new(private_key)
 
         users = User.query.filter_by(is_active=True)

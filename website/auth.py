@@ -7,6 +7,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 
+import os
+
 auth = Blueprint('auth', __name__)
 
 @auth.route("/my_page")
@@ -108,9 +110,8 @@ def sign_up():
             flash("ineApiToken must be greater than 7 characyers.", category="error")
         else:
             # ここから暗号化
-            with open('receiver.pem', 'rb') as f:
-                public_pem = f.read()
-                public_key = RSA.import_key(public_pem)
+            public_pem = os.environ['PUBLIC_KEY']# このtemp2に環境変数である公開鍵が入るようにする
+            public_key = RSA.import_key(public_pem)
 
             cipher_rsa = PKCS1_OAEP.new(public_key)
             manaba_user_name = cipher_rsa.encrypt(manaba_user_name1.encode())
