@@ -6,6 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 import time
 from bs4 import BeautifulSoup
 import re
@@ -33,7 +34,10 @@ def scraping():
             api_token = decipher_rsa.decrypt(user.line_api_token).decode("utf-8")
             # ここまで暗号化解読
 
-            browser = webdriver.Chrome(ChromeDriverManager().install())
+            options = Options()
+            options.add_argument("--headless")
+
+            browser = webdriver.Chrome(ChromeDriverManager().install(),options=options)
             browser.implicitly_wait(3)
 
             url_login = "https://ct.ritsumei.ac.jp/ct/home"
@@ -100,5 +104,5 @@ def scraping():
         pass
     finally:
         print('all finish')
-    return render_template("home.html")
+    return render_template("login.html", user=current_user)
 
