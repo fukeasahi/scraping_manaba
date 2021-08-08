@@ -13,8 +13,7 @@ import re
 import requests
 import datetime
 
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
+from cryptography.fernet import Fernet
 
 import os
 
@@ -23,22 +22,23 @@ manaba = Blueprint('manaba', __name__)
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     try:
-        private_pem = os.environ['PRIVATE_KEY']
-        private_key = RSA.import_key(private_pem)
-        decipher_rsa = PKCS1_OAEP.new(private_key)
+        # # 本番
+        f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
+        f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
+        f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
 
         users = User.query.filter_by(is_active=True)
         for user in users:
             # ここから暗号化解読
-            USER = decipher_rsa.decrypt(user.manaba_user_name).decode("utf-8")
-            PASS = decipher_rsa.decrypt(user.manaba_password).decode("utf-8")
-            api_token = decipher_rsa.decrypt(user.line_api_token).decode("utf-8")
-            # ここまで暗号化解読
+            USER = f_manaba_user_id.decrypt(user.manaba_user_name).decode('utf-8')
+            PASS = f_manaba_password.decrypt(user.manaba_password).decode('utf-8')
+            api_token = f_line_api.decrypt(user.line_api_token).decode('utf-8')
+            # # ここまで暗号化解読
 
             options = Options()
             options.add_argument("--headless")
-
             browser = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+
             browser.implicitly_wait(3)
 
             url_login = "https://ct.ritsumei.ac.jp/ct/home"

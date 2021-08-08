@@ -4,8 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
+from cryptography.fernet import Fernet
 
 import os
 
@@ -110,13 +109,15 @@ def sign_up():
             flash("ineApiToken must be greater than 7 characyers.", category="error")
         else:
             # ここから暗号化
-            public_pem = os.environ['PUBLIC_KEY']# このtemp2に環境変数である公開鍵が入るようにする
-            public_key = RSA.import_key(public_pem)
 
-            cipher_rsa = PKCS1_OAEP.new(public_key)
-            manaba_user_name = cipher_rsa.encrypt(manaba_user_name1.encode())
-            manaba_password = cipher_rsa.encrypt(manaba_password1.encode())
-            line_api_token = cipher_rsa.encrypt(line_api_token1.encode())
+            # 本番
+            f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
+            f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
+            f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
+
+            manaba_user_name=f_manaba_user_id.encrypt(manaba_user_name1.encode())
+            manaba_password=f_manaba_password.encrypt(manaba_password1.encode())
+            line_api_token=f_line_api.encrypt(line_api_token1.encode())
             # ここまで暗号化
 
             new_user = User(email=email, 
