@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% block title %}MLI{% endblock %}
 {% block content %}
 
-<h3 align="center">詳細画面</h3>
+<h3 align="center">ユーザー情報</h3>
 <table class="table">
 
   <tr>
@@ -21,8 +21,10 @@
 
 </table>
 
-<form action="/my_page" method="POST">
+<div style="height:100px;"></div>
 
+<form action="/my_page" method="POST">
+  <h3 align="center">編集</h3>
   <div class="form-group">
     <label for="isActive">LINEへの通知</label>
     <select name="isActive" class="form-control">
