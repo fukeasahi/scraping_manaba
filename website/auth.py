@@ -10,9 +10,15 @@ import os
 
 auth = Blueprint('auth', __name__)
 
-@auth.route("/my_page")
+@auth.route("/my_page", methods=["GET", "POST"])
 @login_required
 def show():
+    if request.method == "POST":
+        current_user.is_active = True if request.form.get("isActive") == "true" else False
+        db.session.commit()
+        flash('Account updated!', category='success')
+        return redirect(url_for('auth.show'))
+
     return render_template("show.html", user=current_user)
 
 # @auth.route("/update", methods=["GET", "POST"])
