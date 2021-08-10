@@ -21,31 +21,6 @@ def show():
 
     return render_template("show.html", user=current_user)
 
-# @auth.route("/update", methods=["GET", "POST"])
-# @login_required
-# def update():
-#     if request.method == "POST":
-#         first_name = request.form.get("firstName")
-#         email = request.form.get("email")
-
-#         user = User.query.filter_by(email=email)
-#         if email != current_user.email and user.count() >= 1:
-#             flash('Email already exists.', category='error')
-#         elif len(email) < 4:
-#             flash("Email must be greater than 4 characyers.", category="error")
-#         elif len(first_name) < 2:
-#             flash("First name must be greater than 2 characyers.", category="error")
-#         else:
-#             current_user.first_name = first_name
-#             current_user.email = email
-#             current_user.is_active = True if request.form.get("isActive") == "true" else False
-#             db.session.commit()
-#             flash('Account updated!', category='success')
-#             return redirect(url_for('auth.show'))
-
-#     return render_template("update.html", user=current_user)
-
-
 @auth.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":

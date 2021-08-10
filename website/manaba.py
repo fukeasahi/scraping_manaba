@@ -74,6 +74,7 @@ def scraping():
 
             yesterday = getYesterday()
             date_yesterday = yesterday.strftime('%Y-%m-%d')
+            print("昨日の日付はこちら",date_yesterday)
 
             url_line = "https://notify-api.line.me/api/notify"
             headers = {"Authorization": "Bearer " + api_token}
