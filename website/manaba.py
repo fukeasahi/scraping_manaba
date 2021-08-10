@@ -44,6 +44,7 @@ def scraping():
             url_login = "https://ct.ritsumei.ac.jp/ct/home"
             browser.get(url_login)
             time.sleep(3)
+            print("ログインページにアクセスしました。")
 
             elem = browser.find_element_by_id('User_ID')
             elem.clear()
@@ -51,14 +52,17 @@ def scraping():
             elem = browser.find_element_by_id('Password')
             elem.clear()
             elem.send_keys(PASS)
+            print("フォームを送信")
 
             browser_from = browser.find_element_by_id('Submit')
             time.sleep(3)
             browser_from.click()
+            print("情報を入力してログインボタンを押しました")
 
             url_home_whatsnew = "https://ct.ritsumei.ac.jp/ct/home_whatsnew"
             time.sleep(1)
             browser.get(url_home_whatsnew)
+            print(url_home_whatsnew,":アクセス完了")
 
             url_manaba = "https://ct.ritsumei.ac.jp/ct/"
 
@@ -86,12 +90,16 @@ def scraping():
                 result_string_str = str(result_string)
                 m = re.search("\d+-\d+-\d+", result_string_str)
                 msg_date = m.group()
+                print(msg_date,"ニュースの日付を取得しました。")
                 if date_yesterday == msg_date:
 
                     href = result.findAll("a")[0].get("href")
                     url_news_title = url_manaba + href
+                    print(url_news_title)
 
                     msg_subject = result.findAll("a")[0].string
+                    print(msg_subject)
+
 
                     message = [
                             msg_subject,url_news_title
