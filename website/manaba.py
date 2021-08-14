@@ -68,9 +68,9 @@ def scraping():
 
             def getYesterday():
                 today=datetime.date.today()
-                # oneday=datetime.timedelta(days=1)
-                # yesterday=today-oneday
-                return today
+                oneday=datetime.timedelta(days=1)
+                yesterday=today-oneday
+                return yesterday
 
             yesterday = getYesterday()
             date_yesterday = yesterday.strftime('%Y-%m-%d')
