@@ -6,7 +6,7 @@ import os
 import re
 import psycopg2
 
-# db = SQLAlchemy()
+db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_app():
@@ -14,16 +14,15 @@ def create_app():
   app.config["SECRET_KEY"] = "hjdfajhkfdka dadfsa"
 
   # ここからsqliteの記述
-  # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
+  app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
   # ここまで
 
   # ここからpostgresql
-  uri = os.environ.get('DATABASE_URL')  # or other relevant config var
-  if uri.startswith("postgres://"):
-      uri = uri.replace("postgres://", "postgresql://", 1)
-  conn = psycopg2.connect(uri, sslmode='require')
-  app.config["SQLALCHEMY_DATABASE_URI"] = uri
-  db = SQLAlchemy(app)
+  # uri = os.environ.get('DATABASE_URL')  # or other relevant config var
+  # if uri.startswith("postgres://"):
+  #     uri = uri.replace("postgres://", "postgresql://", 1)
+  # conn = psycopg2.connect(uri, sslmode='require')
+  # app.config["SQLALCHEMY_DATABASE_URI"] = uri
   # ここまで
 
   db.init_app(app)
@@ -52,11 +51,11 @@ def create_app():
 
 def create_database(app):
   # ここからsqliteの記述
-  # if not path.exists('website/' + DB_NAME):
-  #   db.create_all(app=app)
-  #   print('Created Database!')
+  if not path.exists('website/' + DB_NAME):
+    db.create_all(app=app)
+    print('Created Database!')
   # ここまで
 
   # ここからpostgresql
-  print('Created Database!')
+  # print('Created Database!')
   # ここまで
