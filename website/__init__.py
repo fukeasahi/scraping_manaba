@@ -58,5 +58,5 @@ def create_database(app):
   # ここまで
 
   # ここからpostgresql
-  # print('Created Database!')
+  print('Created Database!')
   # ここまで
