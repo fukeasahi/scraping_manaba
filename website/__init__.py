@@ -7,7 +7,7 @@ import re
 import psycopg2
 
 DB_NAME = "database.db"
-db = SQLAlchemy()
+
 
 def create_app():
   app = Flask(__name__, static_folder='./static')
@@ -57,3 +57,5 @@ def create_app():
 #     db.create_all(app=app)
 #     print('Created Database!')
 # ここまで
+
+db = SQLAlchemy(create_app())
