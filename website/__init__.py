@@ -6,7 +6,7 @@ import os
 import re
 import psycopg2
 
-# db = SQLAlchemy()
+db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_app():
@@ -23,7 +23,6 @@ def create_app():
       uri = uri.replace("postgres://", "postgresql://", 1)
   conn = psycopg2.connect(uri, sslmode='require')
   app.config["SQLALCHEMY_DATABASE_URI"] = uri
-  db = SQLAlchemy(app)
   # ここまで
 
   db.init_app(app)
