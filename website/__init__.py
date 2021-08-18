@@ -22,7 +22,7 @@ def create_app():
   if uri.startswith("postgres://"):
       uri = uri.replace("postgres://", "postgresql://", 1)
   conn = psycopg2.connect(uri, sslmode='require')
-  app.config["SQLALCHEMY_DATABASE_URI"] = conn
+  app.config["SQLALCHEMY_DATABASE_URI"] = uri
   # ここまで
 
   db.init_app(app)
