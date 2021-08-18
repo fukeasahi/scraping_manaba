@@ -18,11 +18,11 @@ def create_app():
    # ここまで
 
   # ここからpostgresql
-  uri = os.getenv("DATABASE_URL")  # or other relevant config var
+  uri = os.environ.get('DATABASE_URL')  # or other relevant config var
   if uri.startswith("postgres://"):
       uri = uri.replace("postgres://", "postgresql://", 1)
-  psycopg2.connect(uri, sslmode='require')
-  app.config["SQLALCHEMY_DATABASE_URI"] = uri
+  conn = psycopg2.connect(uri, sslmode='require')
+  app.config["SQLALCHEMY_DATABASE_URI"] = conn
   # ここまで
 
   db.init_app(app)
