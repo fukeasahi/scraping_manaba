@@ -6,7 +6,6 @@ import os
 import re
 import psycopg2
 
-
 DB_NAME = "database.db"
 db = SQLAlchemy()
 
@@ -38,7 +37,9 @@ def create_app():
 
   from .models import User #,Note
 
-  create_database(app)
+  # ここからsqliteの記述
+  # create_database(app)
+  # ここまで
 
   login_manager = LoginManager()
   login_manager.login_view = 'auth.login'
@@ -50,13 +51,9 @@ def create_app():
 
   return app
 
-def create_database(app):
-  # ここからsqliteの記述
-  if not path.exists('website/' + DB_NAME):
-    db.create_all(app=app)
-    print('Created Database!')
-  # ここまで
-
-  # ここからpostgresql
-  # print('Created Database!')
-  # ここまで
+# ここからsqliteの記述
+# def create_database(app):
+#   if not path.exists('website/' + DB_NAME):
+#     db.create_all(app=app)
+#     print('Created Database!')
+# ここまで
