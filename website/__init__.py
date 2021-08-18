@@ -37,7 +37,7 @@ def create_app():
 
   from .models import User, Note
 
-  create_database(app,db)
+  create_database(app)
 
   login_manager = LoginManager()
   login_manager.login_view = 'auth.login'
