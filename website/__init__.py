@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 import os
+import re
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -12,7 +13,10 @@ def create_app():
   app.config["SECRET_KEY"] = "hjdfajhkfdka dadfsa"
   # os.environ.get('DATABASE_URL')
   # f"sqlite:///{DB_NAME}"
-  app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
+  uri = os.getenv("DATABASE_URL")  # or other relevant config var
+  if uri.startswith("postgres://"):
+      uri = uri.replace("postgres://", "postgresql://", 1)
+  app.config["SQLALCHEMY_DATABASE_URI"] = uri
   
   db.init_app(app)
 
