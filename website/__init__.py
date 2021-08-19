@@ -14,16 +14,16 @@ def create_app():
   app.config["SECRET_KEY"] = "hjdfajhkfdka dadfsa"
 
   # ここからsqliteの記述
-  # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
+  app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
   # ここまで
 
   # ここからpostgresql
-  uri = os.environ.get('DATABASE_URL') or "postgresql://localhost/flasknote"
-  if uri.startswith("postgres://"):
-      uri = uri.replace("postgres://", "postgresql://", 1)
+  # uri = os.environ.get('DATABASE_URL') or "postgresql://localhost/flasknote"
+  # if uri.startswith("postgres://"):
+  #     uri = uri.replace("postgres://", "postgresql://", 1)
   # conn = psycopg2.connect(uri, sslmode='require')
-  app.config["SQLALCHEMY_DATABASE_URI"] = uri
-  db = SQLAlchemy(app)
+  # app.config["SQLALCHEMY_DATABASE_URI"] = uri
+  # db = SQLAlchemy(app)
   # ここまで
 
   db.init_app(app)
@@ -39,7 +39,7 @@ def create_app():
   from .models import User #,Note
 
   # ここからsqliteの記述
-  # create_database(app)
+  create_database(app)
   # ここまで
 
   login_manager = LoginManager()
@@ -53,9 +53,9 @@ def create_app():
   return app
 
 # ここからsqliteの記述
-# def create_database(app):
-#   if not path.exists('website/' + DB_NAME):
-#     db.create_all(app=app)
-#     print('Created Database!')
+def create_database(app):
+  if not path.exists('website/' + DB_NAME):
+    db.create_all(app=app)
+    print('Created Database!')
 # ここまで
 

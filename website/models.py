@@ -20,6 +20,6 @@ class User(db.Model, UserMixin):
   manaba_password = db.Column(db.String(150))
   is_active = db.Column(db.Boolean)
   # date = db.Column(db.DateTime(timezone=True), default=func.now())
-  notes = db.relationship('Note')
+  # notes = db.relationship('Note')
 # ここまでsqlite
 
