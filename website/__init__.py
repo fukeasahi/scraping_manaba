@@ -21,7 +21,7 @@ def create_app():
   uri = os.environ.get('DATABASE_URL') or "postgresql://localhost/flasknote"
   if uri.startswith("postgres://"):
       uri = uri.replace("postgres://", "postgresql://", 1)
-  # conn = psycopg2.connect(uri, sslmode='require')
+  conn = psycopg2.connect(uri, sslmode='require')
   app.config["SQLALCHEMY_DATABASE_URI"] = uri
   # ここまで
 
