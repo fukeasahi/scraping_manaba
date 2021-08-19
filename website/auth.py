@@ -104,7 +104,6 @@ def sign_up():
             manaba_password=manaba_password.decode('utf-8')
             line_api_token=line_api_token.decode('utf-8')
             # ここまで暗号化
-            print("aaaaaaaaaaaaa")
             new_user = User(email=email, 
                             first_name=first_name, 
                             password=generate_password_hash(password1, method='sha256'), 
@@ -112,15 +111,10 @@ def sign_up():
                             manaba_password=manaba_password, 
                             line_api_token=line_api_token, 
                             is_active=is_active)
-            print("bbbbbbbbbbbbbbb")
             db.session.add(new_user)
-            print("ccccccccccccccc")
             db.session.commit()
-            print("ddddddddddddddd")
             login_user(new_user, remember=True)
-            print("eeeeeeeeeeeeeee")
             flash('Account created!', category='success')
-            print("ffffffffffffffff")
             return redirect(url_for('auth.show'))
 
     return render_template("sign_up.html", user=current_user)
