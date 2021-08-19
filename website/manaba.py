@@ -30,9 +30,13 @@ def scraping():
         users = User.query.filter_by(is_active=True)
         for user in users:
             # ここから暗号化解読
-            USER = f_manaba_user_id.decrypt(user.manaba_user_name).decode('utf-8')
-            PASS = f_manaba_password.decrypt(user.manaba_password).decode('utf-8')
-            api_token = f_line_api.decrypt(user.line_api_token).decode('utf-8')
+            _USER = (user.manaba_user_name).encode(encoding='utf-8')
+            _PASS = (user.manaba_password).encode(encoding='utf-8')
+            _api_token = (user.line_api_token).encode(encoding='utf-8')
+
+            USER = f_manaba_user_id.decrypt(_USER).decode('utf-8')
+            PASS = f_manaba_password.decrypt(_PASS).decode('utf-8')
+            api_token = f_line_api.decrypt(_api_token).decode('utf-8')
             # # ここまで暗号化解読
 
             options = Options()

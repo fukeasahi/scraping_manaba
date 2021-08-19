@@ -99,6 +99,10 @@ def sign_up():
             manaba_user_name=f_manaba_user_id.encrypt(manaba_user_name1.encode())
             manaba_password=f_manaba_password.encrypt(manaba_password1.encode())
             line_api_token=f_line_api.encrypt(line_api_token1.encode())
+
+            manaba_user_name=manaba_user_name.decode('utf-8')
+            manaba_password=manaba_password.decode('utf-8')
+            line_api_token=line_api_token.decode('utf-8')
             # ここまで暗号化
             print("aaaaaaaaaaaaa")
             new_user = User(email=email, 
