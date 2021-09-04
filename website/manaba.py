@@ -18,8 +18,7 @@ from cryptography.fernet import Fernet
 import os
 
 from rq import Queue
-import redis
-from rq import Worker, Connection
+from .worker import conn
 
 
 
@@ -125,12 +124,7 @@ def count_manaba():
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
-    redis_url = os.environ['REDISTOGO_URL']
-    conn = redis.from_url(redis_url)
-    with Connection(conn):
-        worker = Worker(['default'])
-        worker.work()
-        q = Queue(connection=conn)
+    q = Queue(connection=conn)
     result = q.enqueue(count_manaba)
     return render_template("login.html", user=current_user)
 
