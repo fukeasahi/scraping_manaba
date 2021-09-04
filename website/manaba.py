@@ -17,19 +17,23 @@ from cryptography.fernet import Fernet
 
 import os
 
+from rq import Queue
+import redis
+from rq import Worker, Connection
+
+
+
 manaba = Blueprint('manaba', __name__)
 
+def count_manaba():
+    try:
+        # # 本番
+        f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
+        f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
+        f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
 
-def execution(is_executed):
-    # # 本番
-    f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
-    f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
-    f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
-
-    users = User.query.filter_by(is_active=True)
-    for user in users:
-        if not user.id in is_executed:
-
+        users = User.query.filter_by(is_active=True)
+        for user in users:
             # ここから暗号化解読
             _USER = (user.manaba_user_name).encode(encoding='utf-8')
             _PASS = (user.manaba_password).encode(encoding='utf-8')
@@ -115,19 +119,18 @@ def execution(is_executed):
 
             browser.close()
             browser.quit()
-            is_executed.append(user.id)
-
+    except:
+        pass
+    return "all finish"
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
-    is_executed = []
-    try:
-        execution(is_executed)
-    except requests.exceptions.Timeout:
-        execution(is_executed)
-    except:
-        pass
-    finally:
-        print('all finish')
+    redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+    conn = redis.from_url(redis_url)
+    with Connection(conn):
+        worker = Worker(['default'])
+        worker.work()
+        q = Queue(connection=conn)
+    result = q.enqueue(count_manaba)
     return render_template("login.html", user=current_user)
 
