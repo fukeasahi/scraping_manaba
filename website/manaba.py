@@ -18,7 +18,7 @@ from cryptography.fernet import Fernet
 import os
 
 from rq import Queue
-from .worker import conn
+from worker import conn
 # import redis
 # from rq import Worker, Connection
 
