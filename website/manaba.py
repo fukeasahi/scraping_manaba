@@ -19,16 +19,17 @@ import os
 
 manaba = Blueprint('manaba', __name__)
 
-@manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
-def scraping():
-    try:
-        # # 本番
-        f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
-        f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
-        f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
 
-        users = User.query.filter_by(is_active=True)
-        for user in users:
+def execution(is_executed):
+    # # 本番
+    f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
+    f_manaba_password=Fernet(os.environ['MANABA_PASSWORD_KEY'].encode(encoding='utf-8'))
+    f_line_api=Fernet(os.environ['LINE_API_KEY'].encode(encoding='utf-8'))
+
+    users = User.query.filter_by(is_active=True)
+    for user in users:
+        if not user.id in is_executed:
+
             # ここから暗号化解読
             _USER = (user.manaba_user_name).encode(encoding='utf-8')
             _PASS = (user.manaba_password).encode(encoding='utf-8')
@@ -114,6 +115,16 @@ def scraping():
 
             browser.close()
             browser.quit()
+            is_executed.append(user.id)
+
+
+@manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
+def scraping():
+    is_executed = []
+    try:
+        execution(is_executed)
+    except RuntimeError:
+        execution(is_executed)
     except:
         pass
     finally:
