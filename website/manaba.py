@@ -124,12 +124,15 @@ def count_manaba():
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
-    redis_url = os.environ['REDISTOGO_URL']
-    conn = redis.from_url(redis_url)
-    with Connection(conn):
-        worker = Worker(['default'])
-        worker.work()
-    q = Queue(connection=conn)
-    result = q.enqueue(count_manaba)
+    try:
+        redis_url = os.environ['REDISTOGO_URL']
+        conn = redis.from_url(redis_url)
+        with Connection(conn):
+            worker = Worker(['default'])
+            worker.work()
+        q = Queue(connection=conn)
+        result = q.enqueue(count_manaba)
+    except:
+        pass
     return render_template("login.html", user=current_user)
 
