@@ -123,7 +123,7 @@ def scraping():
     is_executed = []
     try:
         execution(is_executed)
-    except RuntimeError:
+    except requests.exceptions.Timeout:
         execution(is_executed)
     except:
         pass
