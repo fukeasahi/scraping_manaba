@@ -138,7 +138,7 @@ def scraping():
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7")
     q = Queue(connection=conn)
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa8")
-    q.enqueue(count_manaba)
+    q.enqueue(count_manaba, timeout=43200)
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa9")
     return render_template("login.html", user=current_user)
 
