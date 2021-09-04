@@ -125,7 +125,7 @@ def count_manaba():
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
-    redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+    redis_url = os.environ['REDISTOGO_URL']
     conn = redis.from_url(redis_url)
     with Connection(conn):
         worker = Worker(['default'])
