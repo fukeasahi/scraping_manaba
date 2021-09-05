@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .website.models import User
 from werkzeug.security import generate_password_hash, check_password_hash, pbkdf2_hex
-from . import db
+# from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 from selenium import webdriver
@@ -17,7 +17,13 @@ from cryptography.fernet import Fernet
 
 import os
 
-def manaba_function():
+# manaba = Blueprint('manaba', __name__)
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+sched = BlockingScheduler()
+
+@sched.scheduled_job('interval', minutes=5)
+def scraping():
     try:
         # # 本番
         f_manaba_user_id=Fernet(os.environ['MANABA_USER_ID_KEY'].encode(encoding='utf-8'))
@@ -116,3 +122,4 @@ def manaba_function():
     finally:
         print('all finish')
 
+sched.start()
