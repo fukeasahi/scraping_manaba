@@ -120,14 +120,9 @@ def func_scraping():
     finally:
         print('all finish')
 
-def render_temp():
-    return render_template("login.html", user=current_user)
-
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     p0 = multiprocessing.Process(target=func_scraping)
-    p1 = multiprocessing.Process(target=render_temp)
-    p1.start()
     p0.start()
-  
+    return render_template("login.html", user=current_user)
 
