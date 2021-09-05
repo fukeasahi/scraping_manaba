@@ -125,9 +125,9 @@ def count_manaba():
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7")
-    q = Queue(connection=conn)
+    q = Queue(connection=redis.from_url(os.environ['REDISTOGO_URL']))
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa8")
-    q.enqueue(count_manaba, timeout=43200)
+    q.enqueue(count_manaba)
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa9")
     return render_template("login.html", user=current_user)
 
