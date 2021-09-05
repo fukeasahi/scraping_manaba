@@ -30,4 +30,5 @@ def scraping():
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6")
     result = q.enqueue(manaba_function)
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7")
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa8",result.result)
     return render_template("login.html", user=current_user)
