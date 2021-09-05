@@ -26,8 +26,16 @@ manaba = Blueprint('manaba', __name__)
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1")
-    q = Queue(connection=redis.from_url(os.environ['REDISTOGO_URL']))
+    listen = ['high', 'default', 'low']
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2")
+    with Connection(redis.from_url(os.environ['REDISTOGO_URL'])):
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3")
+        worker = Worker(map(Queue, listen))
+        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4")
+        worker.work()
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa5")
+    q = Queue(connection=redis.from_url(os.environ['REDISTOGO_URL']))
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6")
     result = q.enqueue(manaba_function)
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3")
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7")
     return render_template("login.html", user=current_user)
