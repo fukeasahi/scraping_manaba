@@ -17,10 +17,17 @@ from cryptography.fernet import Fernet
 
 import os
 from .manaba_function import manaba_function
+from rq import Queue
+import redis
+from rq import Worker, Queue, Connection
 
 manaba = Blueprint('manaba', __name__)
 
 @manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
 def scraping():
-    manaba_function()
-
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1")
+    q = Queue(connection=redis.from_url(os.environ['REDISTOGO_URL']))
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2")
+    result = q.enqueue(manaba_function)
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa3")
+    return render_template("login.html", user=current_user)

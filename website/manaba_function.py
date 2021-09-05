@@ -115,5 +115,4 @@ def manaba_function():
         pass
     finally:
         print('all finish')
-    return render_template("login.html", user=current_user)
 
