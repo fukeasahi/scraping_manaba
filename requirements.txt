@@ -73,3 +73,4 @@ tzlocal==2.1
 urllib3==1.26.6
 webdriver-manager==3.4.2
 Werkzeug==2.0.1
+multiprocess==0.70.12.2
