@@ -23,6 +23,7 @@ cA2GJhKS
 ### サインアップ・ログイン機能
 <img width="1440" alt="スクリーンショット 2021-09-11 15 55 33" src="https://user-images.githubusercontent.com/62973488/132939498-80147808-e8df-4078-83b5-56ca76bb7e9f.png">
 ### ユーザー情報編集機能
+
 ### 毎日0時5分に大学の新着情報をLINEに送信する機能
 <img width="1069" alt="スクリーンショット 2021-09-11 15 28 44" src="https://user-images.githubusercontent.com/62973488/132938782-9e2f7f57-c7dc-474d-98bb-9eceead38150.png">
 
