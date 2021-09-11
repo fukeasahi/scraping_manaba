@@ -17,7 +17,7 @@ xV4FrzY9@gmail.com
 cA2GJhKS
 ```
 ### 動画
-- 動画
+https://user-images.githubusercontent.com/62973488/132943233-037f5542-d848-454d-b70f-d81552707506.mp4
 
 ## 機能一覧
 ### ログイン機能
