@@ -120,9 +120,8 @@ def func_scraping():
     finally:
         print('all finish')
 
-@manaba.route("/626c6954637cf4b6d916be402cabe3b83b7ef1bb7f06c5a424d86b79e091aa22")
+@manaba.route(os.environ['START_SCRAPING_URL'])
 def scraping():
     p0 = multiprocessing.Process(target=func_scraping)
     p0.start()
     return render_template("login.html", user=current_user)
-
