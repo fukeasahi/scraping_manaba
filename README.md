@@ -8,7 +8,7 @@
 ## デモ画面
 ### 画面のスクリンショットや動画
 ### テストアカウント
-#### URL
+#### ログイン画面
 https://mli-for-scraping-manaba.herokuapp.com/login
 #### email
 ```
