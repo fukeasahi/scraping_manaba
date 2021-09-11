@@ -9,9 +9,7 @@
 ### 画面のスクリンショットや動画
 ### テストアカウント
 #### URL
-```
 https://mli-for-scraping-manaba.herokuapp.com/
-```
 #### email
 ```
 xV4FrzY9@gmail.com
