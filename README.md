@@ -3,10 +3,9 @@
 立命館大学の新着情報をLINEに送信するWebアプリケーション
 
 <img width="1440" alt="スクリーンショット 2021-09-11 15 26 27" src="https://user-images.githubusercontent.com/62973488/132938706-3642c113-e9c8-4ffc-9e77-8a7b905e26d6.png">
-<img width="1069" alt="スクリーンショット 2021-09-11 15 28 44" src="https://user-images.githubusercontent.com/62973488/132938782-9e2f7f57-c7dc-474d-98bb-9eceead38150.png">
+
 
 ## デモ画面
-### 画面のスクリンショットや動画
 ### テストアカウント
 #### ログイン画面
 https://mli-for-scraping-manaba.herokuapp.com/login
@@ -18,8 +17,15 @@ xV4FrzY9@gmail.com
 ```
 cA2GJhKS
 ```
+### 画面のスクリンショットや動画
+
 
 ## 機能一覧
+### サインアップ・ログイン機能
+### ユーザー情報編集機能
+### 毎日0時5分に大学の新着情報をLINEに送信する機能
+<img width="1069" alt="スクリーンショット 2021-09-11 15 28 44" src="https://user-images.githubusercontent.com/62973488/132938782-9e2f7f57-c7dc-474d-98bb-9eceead38150.png">
+
 ## 注力した機能や工夫した点
 ## 環境構築の手順
 
