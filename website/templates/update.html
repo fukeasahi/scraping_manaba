@@ -1,0 +1,44 @@
+<!-- {% extends "base.html" %}{% block title %}MLI{% endblock %}
+{% block content %}
+
+<form action="/update" method="POST">
+  <h3 align="center">編集画面</h3>
+
+  <div class="form-group">
+    <label for="firstName">名前</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder="立命館太郎"
+      value={{user.first_name}}
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="abc@gmail.com"
+      value={{user.email}}
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="isActive">LINEへの通知</label>
+    <select name="isActive" class="form-control">
+      <option value="true" class="form-control">ON</option>
+      <option value="false" class="form-control">OFF</option>
+    </select>
+  </div>
+
+  <br />
+  <button type="submit" class="bt form-control" style="background-color:lightseagreen; color:rgba(255,255,255,.5);">更新</button>
+</form>
+<br>
+
+{% endblock %} -->

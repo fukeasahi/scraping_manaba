@@ -1,0 +1,40 @@
+{% extends "base.html" %}{% block title %}MLI{% endblock %}
+{% block content %}
+
+<h3 align="center">ユーザー情報</h3>
+<table class="table">
+
+  <tr>
+    <td>名前</td>
+    <td>{{user.first_name}}</td>
+  </tr>
+
+  <tr>
+    <td>Email</td>
+    <td>{{user.email}}</td>
+  </tr>
+
+  <tr>
+    <td>LINEへの通知</td>
+    <td>{{"ON" if user.is_active else "OFF"}}</td>
+  </tr>
+
+</table>
+
+<div style="height:100px;"></div>
+
+<form action="/my_page" method="POST">
+  <h3 align="center">編集</h3>
+  <div class="form-group">
+    <label for="isActive">LINEへの通知</label>
+    <select name="isActive" class="form-control">
+      <option value="true" class="form-control">ON</option>
+      <option value="false" class="form-control">OFF</option>
+    </select>
+  </div>
+
+  <br />
+  <button type="submit" class="bt form-control" style="background-color:lightseagreen; color:rgba(255,255,255,.5);">更新</button>
+</form>
+
+{% endblock %}

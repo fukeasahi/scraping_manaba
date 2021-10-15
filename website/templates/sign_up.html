@@ -1,44 +1,54 @@
-{% extends "base.html" %}{% block title %}Sign up{% endblock %}
-
+{% extends "base.html" %}{% block title %}MLI{% endblock %}
 {% block content %}
 <form method="POST">
-  <h3 align="center">Sign Up</h3>
+  <h3 align="center">会員登録</h3>
 
   <div class="form-group">
-    <label for="manabaUserName">manaba user name</label>
+    <label for="manabaUserName1">manaba+RのUser ID</label>
     <input
-      type="text"
+      type="password"
       class="form-control"
-      id="manabaUserName"
-      name="manabaUserName"
-      placeholder="Enter manaba user name"
+      id="manabaUserName1"
+      name="manabaUserName1"
+      placeholder="ri0000ts"
     />
   </div>
 
   <div class="form-group">
-    <label for="manabaPassword1">manaba password</label>
+    <label for="manabaUserName2">manaba+RのUser ID(確認)</label>
+    <input
+      type="password"
+      class="form-control"
+      id="manabaUserName2"
+      name="manabaUserName2"
+      placeholder="ri0000ts"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="manabaPassword1">manaba+RのPassword</label>
     <input
       type="password"
       class="form-control"
       id="manabaPassword1"
       name="manabaPassword1"
-      placeholder="Enter manaba password"
+      placeholder="Y3v2amNc"
     />
   </div>
 
   <div class="form-group">
-    <label for="manabaPassword2">manaba password(Confirm)</label>
+    <label for="manabaPassword2">manaba+RのPassword(確認)</label>
     <input
       type="password"
       class="form-control"
       id="manabaPassword2"
       name="manabaPassword2"
-      placeholder="Enter manaba password"
+      placeholder="Y3v2amNc"
     />
   </div>
 
   <div class="form-group">
-    <label for="lineApiToken1">line api token</label>
+    <label for="lineApiToken1">LINE NotifyのAPI Token&nbsp;&nbsp;<a href="/line_api" style="color: lightseagreen;">LINE NotifyのAPI Tokenについて</a></label>
     <input
       type="password"
       class="form-control"
@@ -49,7 +59,7 @@
   </div>
 
   <div class="form-group">
-    <label for="lineApiToken2">line api token(Confirm)</label>
+    <label for="lineApiToken2">LINE NotifyのAPI Token(確認)</label>
     <input
       type="password"
       class="form-control"
@@ -60,50 +70,50 @@
   </div>
 
   <div class="form-group">
-    <label for="email">Email Address</label>
+    <label for="email">Email</label>
     <input
       type="email"
       class="form-control"
       id="email"
       name="email"
-      placeholder="Enter email"
+      placeholder="abc@gmail.com"
     />
   </div>
 
   <div class="form-group">
-    <label for="firstName">First Name</label>
+    <label for="firstName">名前</label>
     <input
       type="text"
       class="form-control"
       id="firstName"
       name="firstName"
-      placeholder="Enter first name"
+      placeholder="立命館太郎"
     />
   </div>
 
   <div class="form-group">
-    <label for="password1">Password</label>
+    <label for="password1">MLIにログインするためのPassword</label>
     <input
       type="password"
       class="form-control"
       id="password1"
       name="password1"
-      placeholder="Enter password"
+      placeholder="Eb4qfrMR"
     />
   </div>
 
   <div class="form-group">
-    <label for="password2">Password (Confirm)</label>
+    <label for="password2">MLIにログインするためのPassword(確認)</label>
     <input
       type="password"
       class="form-control"
       id="password2"
       name="password2"
-      placeholder="Confirm password"
+      placeholder="Eb4qfrMR"
     />
   </div>
 
   <br />
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="bt form-control" style="background-color:lightseagreen; color:rgba(255,255,255,.5);">会員登録</button>
 </form>
 {% endblock %}

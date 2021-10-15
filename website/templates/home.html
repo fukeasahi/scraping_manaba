@@ -1,5 +1,50 @@
-{% extends "base.html" %}{% block title %}Home{% endblock %}
+<style>
+  .home_box1{
+    margin-bottom: 150px;
+  }
+  .home_box2{
+    margin-bottom: 100px;
+  }
+  .how_do_you_use_MLI{
+    width: 40%;
+  }
+  @media screen and (max-width:425px) {
+    .how_do_you_use_MLI{
+      width:  100%;
+    }
+  }
+</style>
 
+{% extends "base.html" %}{% block title %}MLI{% endblock %}
 {% block content %}
-<h1>this is the home page</h1>
+<div class="home_box1">
+  <h1 align="center">What is MLI?</h1>
+  <p align="center">
+    MLIはmanab+R LINE Interfaceの頭文字を取って命名しました。<br>毎日午前0時にあなたのLINEにmanab+Rの新着情報を通知するWebアプリケーションです。
+  </p>
+</div>
+
+<div class="home_box1">
+  <h1 align="center">Why did he develop MLI?</h1>
+  <!-- <div align="center"><img src="/static/images/sad.png" style="width:100%;"></div> -->
+  <p>
+  立命館大学では、manaba+RというWebアプリケーションに大学からの新着情報が流れてきます。
+  しかし、私が大学1回生のとき、「新着情報がいつ流れてくるのかわからない」、「確認するのに毎回ログインしないといけない」など不便に感じていました。
+  その時、「大学からの新着情報をLINEに送ることができれば便利だ」と思いました。
+  そして、ローカル環境で、「大学の新着情報をLINEに送信するシステム」を開発し、不便に感じていたことを解消しました。
+  その後、私の他にも、同じような悩みを持っている立命館大学生がいるはずだと思い、このアプリケーションを開発しました。
+  </p>
+</div>
+
+<div class="home_box2">
+  <h1 align="center">How do you use MLI?</h1>
+  <div class="how_do_you_use_MLI" style="margin: 0 auto;">
+    <ol>
+      <li>LINE NotifyのAPI Tokenの発行してください<br><a href="/line_api" style="color:lightseagreen;">LINE NotifyのAPI Tokenはこちら</a></li>
+      <li>会員登録をしてください<br><a href="/sign-up" style="color:lightseagreen;">会員登録はこちら</a></li>
+      <li>編集画面で「LINEへの通知」をONにすれば、OKです</li>
+    </ol>
+  </div >
+</div>
+
 {% endblock %}
